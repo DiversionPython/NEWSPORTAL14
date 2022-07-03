@@ -1,0 +1,88 @@
+from news.models import *
+
+u1 = User.objects.create_user(username="Anna")
+Author.objects.create(authorUser=u1)
+u2 = User.objects.create_user(username="Bob")
+Author.objects.create(authorUser=u2)
+
+
+Category.objects.create(name='SPORT') #создание категории #1
+Category.objects.create(name='BUSINESS') #2
+Category.objects.create(name='TRAVEL') #3
+Category.objects.create(name='ENTERTAINMENT') #4
+
+
+Post.objects.create(author=Author.objects.get(id=1), categoryType='AR', title='Курс доллара', text='Курс доллара вырос на ₽6, или 7,9%, на открытии торгов в понедельник, 11 апреля, и составил ₽82,095.')
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=2))
+Post.objects.create(author=Author.objects.get(id=2), categoryType='AR', title='Велотуризм', text='Велотур по Нидерландам, 1300 км. Больше тысячи километров по самой велосипедной стране Европы. ')
+Post.objects.get(id=2).postCategory.add(Category.objects.get(id=1))
+Post.objects.get(id=2).postCategory.add(Category.objects.get(id=3))
+Post.objects.create(author=Author.objects.get(id=2), categoryType='NW', title='Новая песня Rammstein', text='Группа Rammstein представила на суд публики вторую песню под названием «Zick Zack» с нового альбома «Zeit». '
+                                                                                          'Песня будет представлять второй сингл, который поступит в продажу 13 апреля.')
+Post.objects.get(id=3).postCategory.add(Category.objects.get(id=4))
+
+
+Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=2).authorUser, text='Как всегда.')
+Post.objects.get(id=1).like()
+Post.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).dislike()
+
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=1).authorUser, text='Интересно!')
+Post.objects.get(id=2).like()
+Post.objects.get(id=2).like()
+Post.objects.get(id=2).dislike()
+Comment.objects.get(id=2).like()
+
+
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=2).authorUser, text='Хотел бы так же!')
+Post.objects.get(id=2).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=3).dislike()
+
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=2).authorUser, text='Ставлю лайк!')
+Comment.objects.get(id=4).like()
+Comment.objects.get(id=4).like()
+Comment.objects.get(id=4).like()
+Comment.objects.get(id=4).dislike()
+Post.objects.get(id=2).dislike()
+
+Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=Author.objects.get(id=1).authorUser, text='Все понятно...')
+Post.objects.get(id=3).like()
+Post.objects.get(id=3).like()
+Comment.objects.get(id=5).dislike()
+
+Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=Author.objects.get(id=2).authorUser, text='Надо продолжать...')
+Post.objects.get(id=3).dislike()
+Comment.objects.get(id=6).like()
+Comment.objects.get(id=6).dislike()
+
+Author.objects.get(id=1).update_rating()
+Author.objects.get(id=1).ratingAuthor
+
+Author.objects.get(id=2).update_rating()
+Author.objects.get(id=2).ratingAuthor
+
+#Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
+bestUser = Author.objects.order_by('-ratingAuthor')[0]
+print(f'Автор лучшей статьи: {bestUser.authorUser.username}, '
+	  f'с рейтингом {bestUser.ratingAuthor}')
+
+#Вывести дату добавления лучшей статьи, username автора, рейтинг, заголовок и превью лучшей статьи, основываясь на лайках/дислайках к этой статье.
+bestPost= Post.objects.order_by('-rating')[0]
+print(f"Лучшая статья создана: {bestPost.dateCreation.strftime('%Y-%m-%d')}, "
+	  f"автором {bestPost.author.authorUser.username}, "
+	  f"рейтинг статьи {bestPost.rating}, "
+	  f"с заголовком '{bestPost.title}', c превью '{bestPost.preview()}'")
+
+#Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
+
+combestpost = bestPost.comment_set.all()
+for i in combestpost:
+	print(f"дата комментария {i.dateCreations.strftime('%Y-%m-%d')}, "
+		  f"автор {i.commentUser}, рейтинг {i.rating}, текст '{i.text}'")
+
+
+User._meta.get_fields()  - все поля

@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+{% load i18n %}
+{% block title %}
+Category list
+{% endblock title %}
+{% block content %}
+
+<table>
+    <thead>
+        <th>
+            Категории
+        </th>
+    </thead>
+    {% for cat in category %}
+    <tr>
+       <td>
+            {{ cat.name }}
+            <a href="{% url 'add_subscribe' cat.pk %}"><u>Подписаться!</u></a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

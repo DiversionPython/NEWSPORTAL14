@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-03 17:21+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\NewsPaper\settings.py:112
+msgid "English"
+msgstr "Английский"
+
+#: .\NewsPaper\settings.py:113
+msgid "Русский"
+msgstr "Russian"
+
+#: .\news\views.py:71
+msgid ") Все новости . общее количество новостей ->>"
+msgstr ") All news . total News"
+
+#: .\templates\flatpages\default.html:65
+msgid "Новости"
+msgstr "News"
+
+#: .\templates\flatpages\default.html:68
+msgid "Поиск"
+msgstr "Search"
+
+#: .\templates\flatpages\default.html:71
+msgid "Категории"
+msgstr "Categories"
+
+#: .\templates\flatpages\default.html:74
+msgid "Личный кабинет"
+msgstr "My account"
+
+#: .\templates\news.html:13
+msgid "Количество новостей на странице:"
+msgstr "Number of news per page:"
+
+#: .\templates\news.html:19 .\templates\onenews.html:14
+msgid "Заголовок"
+msgstr "Title"
+
+#: .\templates\news.html:20 .\templates\onenews.html:16
+msgid "Дата публикации"
+msgstr "Publication date"
+
+#: .\templates\news.html:21 .\templates\onenews.html:15
+msgid "Текст"
+msgstr "Text"
+
+#: .\templates\news.html:36
+#, fuzzy
+#| msgid "Новости"
+msgid "Новостей нет"
+msgstr "No news"
+
+#: .\templates\search.html:33
+#, fuzzy
+#| msgid "Новости"
+msgid "Новостей нет!"
+msgstr "No news"
+
+#~ msgid "Russian"
+#~ msgstr "Русский"
+
+
